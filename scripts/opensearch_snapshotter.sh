@@ -6,6 +6,7 @@
 
 set -ue
 
+DEBUG_LEVEL=${DEBUG_LEVEL:=0}
 NEW_SNAPSHOT_NAME="daily-$(date +%F-%T | tr ':' '-')"
 TIMESTAMP=$(date +%s)
 
@@ -73,6 +74,7 @@ function get_snapshots(){
 }
 
 function take_snapshot(){
+	__msg "Taking snapshot: "
 	__es_curl_put "_snapshot/$SNAPSHOT_REPOSITORY/$NEW_SNAPSHOT_NAME" <<-EOF
 		{
 		  "ignore_unavailable": true,
@@ -96,7 +98,7 @@ function delete_old_snapshots(){
 				__msg "Deleting snapshot: $snapshot_name (age: $snapshot_age_days days, retention: $SNAPSHOT_RETENTION_DAYS): "
 				__es_curl_delete "_snapshot/$SNAPSHOT_REPOSITORY/$snapshot_name"
 			else
-				[[ -n $DEBUG ]] && __msgnl "Keeping snapshot $snapshot_name (age: $snapshot_age_days days, retention $SNAPSHOT_RETENTION_DAYS)"
+				[[ $DEBUG_LEVEL -ge 1 ]] && __msgnl "Keeping snapshot $snapshot_name (age: $snapshot_age_days days, retention $SNAPSHOT_RETENTION_DAYS)"
 			fi
 		done
 

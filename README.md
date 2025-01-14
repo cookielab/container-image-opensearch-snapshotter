@@ -13,7 +13,7 @@ This script automates regular snapshot management of AWS OpenSearch Cluster.
 ### Environment Variables
 - `AWS_REGION` AWS region of the sts endpoint,
 - `AWS_ROLE_ARN` AWS role to assume,
-- `DEBUG` (optional) Set any value to enable priting of snapshots kept by `delete_old_snapshots`,
+- `DEBUG_LEVEL` (optional) Set debug level [0-5].
 - `OPENSEARCH_BASE_URL` Opensearch endpoint URL (proto://host[:port]/) - trailing slash is required,
 - `SNAPSHOT_REPOSITORY` name of the OpenSearch snapshot repository,
 - `SNAPSHOT_RETENTION_DAYS` snapshot retention period in days,
