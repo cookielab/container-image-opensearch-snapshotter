@@ -1,4 +1,4 @@
-FROM cookielab/slim:12.0 AS build
+FROM cookielab/slim:12.9 AS build
 
 ARG TARGETARCH
 
