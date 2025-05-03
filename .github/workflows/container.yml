@@ -54,7 +54,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push - testing - alpine
+      - name: Build and push - testing - slim
         uses: docker/build-push-action@v6
         timeout-minutes: 15
         if: ${{ !steps.get-version.outputs.is-semver }}
@@ -64,11 +64,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            cookielab/opensearch-snapshotter:${{ github.ref_name }}-alpine
-            public.ecr.aws/cookielab/opensearch-snapshotter:${{ github.ref_name }}-alpine
-            ghcr.io/${{ github.repository }}:${{ github.ref_name }}-alpine
+            cookielab/opensearch-snapshotter:${{ github.ref_name }}-slim
+            public.ecr.aws/cookielab/opensearch-snapshotter:${{ github.ref_name }}-slim
+            ghcr.io/${{ github.repository }}:${{ github.ref_name }}-slim
 
-      - name: Build and push - pre-release - alpine
+      - name: Build and push - pre-release - slim
         uses: docker/build-push-action@v6
         timeout-minutes: 15
         if: ${{ steps.get-version.outputs.is-semver && steps.get-version.outputs.prerelease != '' }}
@@ -78,11 +78,11 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-alpine
-            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-alpine
-            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.version-without-v }}-alpine
+            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-slim
+            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-slim
+            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.version-without-v }}-slim
 
-      - name: Build and push - stable - alpine
+      - name: Build and push - stable - slim
         uses: docker/build-push-action@v6
         timeout-minutes: 15
         if: ${{ steps.get-version.outputs.is-semver && steps.get-version.outputs.prerelease == '' }}
@@ -92,15 +92,15 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-alpine
-            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}.${{ steps.get-version.outputs.patch }}-alpine
-            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}-alpine
-            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}-alpine
-            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-alpine
-            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}.${{ steps.get-version.outputs.patch }}-alpine
-            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}-alpine
-            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}-alpine
-            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.version-without-v }}-alpine
-            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}.${{ steps.get-version.outputs.patch }}-alpine
-            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}-alpine
-            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.major }}-alpine
+            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-slim
+            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}.${{ steps.get-version.outputs.patch }}-slim
+            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}-slim
+            cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}-slim
+            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.version-without-v }}-slim
+            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}.${{ steps.get-version.outputs.patch }}-slim
+            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}-slim
+            public.ecr.aws/cookielab/opensearch-snapshotter:${{ steps.get-version.outputs.major }}-slim
+            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.version-without-v }}-slim
+            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}.${{ steps.get-version.outputs.patch }}-slim
+            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.major }}.${{ steps.get-version.outputs.minor }}-slim
+            ghcr.io/${{ github.repository }}:${{ steps.get-version.outputs.major }}-slim
